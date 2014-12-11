@@ -16,7 +16,7 @@ class DepartmentController {
     }
 
     def show(Department departmentInstance) {
-        respond departmentInstance
+        respond departmentInstance, model : [itemDepartment: Item.findAllByDepartment(departmentInstance)]
     }
 
     def create() {

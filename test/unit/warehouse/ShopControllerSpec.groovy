@@ -5,7 +5,7 @@ import grails.test.mixin.*
 import spock.lang.*
 
 @TestFor(ShopController)
-@Mock(Shop)
+@Mock(Purchase)
 class ShopControllerSpec extends Specification {
 
     def populateValidParams(params) {
@@ -37,7 +37,7 @@ class ShopControllerSpec extends Specification {
         when: "The save action is executed with an invalid instance"
         request.contentType = FORM_CONTENT_TYPE
         request.method = 'POST'
-        def shop = new Shop()
+        def shop = new Purchase()
         shop.validate()
         controller.save(shop)
 
@@ -48,14 +48,14 @@ class ShopControllerSpec extends Specification {
         when: "The save action is executed with a valid instance"
         response.reset()
         populateValidParams(params)
-        shop = new Shop(params)
+        shop = new Purchase(params)
 
         controller.save(shop)
 
         then: "A redirect is issued to the show action"
         response.redirectedUrl == '/shop/show/1'
         controller.flash.message != null
-        Shop.count() == 1
+        Purchase.count() == 1
     }
 
     void "Test that the show action returns the correct model"() {
@@ -67,7 +67,7 @@ class ShopControllerSpec extends Specification {
 
         when: "A domain instance is passed to the show action"
         populateValidParams(params)
-        def shop = new Shop(params)
+        def shop = new Purchase(params)
         controller.show(shop)
 
         then: "A model is populated containing the domain instance"
@@ -83,7 +83,7 @@ class ShopControllerSpec extends Specification {
 
         when: "A domain instance is passed to the edit action"
         populateValidParams(params)
-        def shop = new Shop(params)
+        def shop = new Purchase(params)
         controller.edit(shop)
 
         then: "A model is populated containing the domain instance"
@@ -103,7 +103,7 @@ class ShopControllerSpec extends Specification {
 
         when: "An invalid domain instance is passed to the update action"
         response.reset()
-        def shop = new Shop()
+        def shop = new Purchase()
         shop.validate()
         controller.update(shop)
 
@@ -114,7 +114,7 @@ class ShopControllerSpec extends Specification {
         when: "A valid domain instance is passed to the update action"
         response.reset()
         populateValidParams(params)
-        shop = new Shop(params).save(flush: true)
+        shop = new Purchase(params).save(flush: true)
         controller.update(shop)
 
         then: "A redirect is issues to the show action"
@@ -135,16 +135,16 @@ class ShopControllerSpec extends Specification {
         when: "A domain instance is created"
         response.reset()
         populateValidParams(params)
-        def shop = new Shop(params).save(flush: true)
+        def shop = new Purchase(params).save(flush: true)
 
         then: "It exists"
-        Shop.count() == 1
+        Purchase.count() == 1
 
         when: "The domain instance is passed to the delete action"
         controller.delete(shop)
 
         then: "The instance is deleted"
-        Shop.count() == 0
+        Purchase.count() == 0
         response.redirectedUrl == '/shop/index'
         flash.message != null
     }

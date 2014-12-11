@@ -1,4 +1,4 @@
-<%@ page import="warehouse.User" %>
+<%@ page import="warehouse.BusinessLogicService; warehouse.Department; warehouse.User" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,25 +67,21 @@
 			<div class="header-top-inner">
 				<div class="cnt-account">
 					<ul class="list-unstyled">
+						<% if(BusinessLogicService.authenticated()) {%>
 						<li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
 						<li><a href="#"><i class="icon fa fa-heart"></i>Wishlist</a></li>
-						<li><a href="#"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
+						<li><a href="${createLink(uri: '/')}/cart"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
 						<li><a href="#"><i class="icon fa fa-key"></i>Checkout</a></li>
-						<li><a href="#"><i class="icon fa fa-sign-in"></i>Login</a></li>
+						<li><g:link controller="user" action="logout" ><i class="icon fa fa-key"></i>LogOut</g:link></li>
+						<% } %>
+						<% if(!BusinessLogicService.authenticated()) {%>
+							<li><a href="${createLink(uri: '/')}login/auth"><i class="icon fa fa-sign-in"></i>Login</a></li>
+						<% } %>
 					</ul>
 				</div><!-- /.cnt-account -->
 
 				<div class="cnt-block">
 					<ul class="list-unstyled list-inline">
-						<li class="dropdown dropdown-small">
-							<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="key">currency :</span><span class="value">USD </span><b class="caret"></b></a>
-							<ul class="dropdown-menu">
-								<li><a href="#">USD</a></li>
-								<li><a href="#">INR</a></li>
-								<li><a href="#">GBP</a></li>
-							</ul>
-						</li>
-
 						<li class="dropdown dropdown-small">
 							<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown"><span class="key">language :</span><span class="value">English </span><b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -236,232 +232,35 @@
 						<div class="nav-outer">
 							<ul class="nav navbar-nav">
 								<li class="active dropdown yamm-fw">
-									<a href="index.php?page=home" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Home</a>
-									<ul class="dropdown-menu">
-										<li>
-											<div class="yamm-content">
-												<div class="row">
-													<div class="col-md-8 col-sm-8">
-														<div class="row">
-															<div class='col-md-12'>
-
-																<div class="col-xs-12 col-sm-6 col-md-3">
-																	<h2 class="title">Computer</h2>
-																	<ul class="links">
-																		<li><a href="#">Lenovo</a></li>
-																		<li><a href="#">Microsoft </a></li>
-																		<li><a href="#">Fuhlen</a></li>
-																		<li><a href="#">Longsleeves</a></li>
-																	</ul>
-																</div><!-- /.col -->
-
-																<div class="col-xs-12 col-sm-6 col-md-3">
-																	<h2 class="title">Camera</h2>
-																	<ul class="links">
-																		<li><a href="#">Fuhlen</a></li>
-																		<li><a href="#">Lenovo</a></li>
-																		<li><a href="#">Microsoft </a></li>
-																		<li><a href="#">Longsleeves</a></li>
-																	</ul>
-																</div><!-- /.col -->
-
-																<div class="col-xs-12 col-sm-6 col-md-3">
-																	<h2 class="title">Apple Store</h2>
-																	<ul class="links">
-																		<li><a href="#">Longsleeves</a></li>
-																		<li><a href="#">Fuhlen</a></li>
-																		<li><a href="#">Lenovo</a></li>
-																		<li><a href="#">Microsoft </a></li>
-																	</ul>
-																</div><!-- /.col -->
-
-																<div class="col-xs-12 col-sm-6 col-md-3">
-																	<h2 class="title">Smart Phone</h2>
-																	<ul class="links">
-																		<li><a href="#">Microsoft </a></li>
-																		<li><a href="#">Longsleeves</a></li>
-																		<li><a href="#">Fuhlen</a></li>
-																		<li><a href="#">Lenovo</a></li>
-
-																	</ul>
-																</div><!-- /.col -->
-
-															</div>
-
-														</div>
-													</div>
-													<div class="col-sm-4">
-													</div>
-												</div><!-- /.row -->
-
-											<!-- ============================================== WIDE PRODUCTS ============================================== -->
-												<div class="wide-banners megamenu-banner">
-													<div class="row">
-														<div class="col-sm-12 col-md-8">
-															<div class="row">
-																<div class="col-md-12">
-																	<div class="col-sm-6 col-md-6">
-																		<div class="wide-banner cnt-strip">
-																			<div class="image">
-																				<img class="img-responsive" data-echo="http://demo.transvelo.com/unicase/assets/images/banners/4.jpg" src="${createLink(uri: '/')}assets/images/blank.gif" alt="">
-																			</div>
-																			<div class="strip">
-																				<div class="strip-inner text-right">
-																					<h3 class="white">new trend</h3>
-																					<h2 class="white">apple product</h2>
-																				</div>
-																			</div>
-																		</div><!-- /.wide-banner -->
-																	</div><!-- /.col -->
-
-																	<div class="col-sm-6 col-md-6">
-																		<div class="wide-banner cnt-strip">
-																			<div class="image">
-																				<img class="img-responsive" data-echo="http://demo.transvelo.com/unicase/assets/images/banners/5.jpg" src="${createLink(uri: '/')}assets/images/blank.gif" alt="">
-																			</div>
-																			<div class="strip">
-																				<div class="strip-inner text-left">
-																					<h3 class="white">camera collection</h3>
-																					<h2 class="white">new arrivals</h2>
-																				</div>
-																			</div>
-																		</div><!-- /.wide-banner -->
-																	</div><!-- /.col -->
-																</div>
-
-															</div><!-- /.row -->
-														</div>
-														<div class="col-sm-12 col-md-4 hidden-xs hidden-sm">
-															<p class="text ">LenovoProin gravida nibh vel velit auctor aliquet es  Aenean sollicitudin,lorem quis bibendu auctor,nisi elit consequat ipsum auctor.</p>
-														</div>
-													</div>
-												</div><!-- /.wide-banners -->
-
-											<!-- ============================================== WIDE PRODUCTS : END ============================================== -->
-
-											</div><!-- /.yamm-content -->					</li>
-									</ul>
+									<a href="${createLink(uri: '/')}" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Inicio</a>
 								</li>
 								<li class="dropdown yamm">
-									<a href="index.php?page=home" data-hover="dropdown" class="dropdown-toggle" data-toggle="dropdown">Desktop</a>
-									<ul class="dropdown-menu">
-										<li>
-											<div class="yamm-content">
-												<div class="row">
-													<div class='col-sm-12'>
-														<div class="col-xs-12 col-sm-12 col-md-4">
-															<h2 class="title">Laptops &amp; Notebooks</h2>
-															<ul class="links">
-																<li><a href="#">Power Supplies Power</a></li>
-																<li><a href="#">Power Supply Testers Sound </a></li>
-																<li><a href="#">Sound Cards (Internal)</a></li>
-																<li><a href="#">Video Capture &amp; TV Tuner Cards</a></li>
-																<li><a href="#">Other</a></li>
-															</ul>
-														</div><!-- /.col -->
-
-														<div class="col-xs-12 col-sm-12 col-md-4">
-															<h2 class="title">Computers &amp; Laptops</h2>
-															<ul class="links">
-																<li><a href="#">Computer Cases &amp; Accessories</a></li>
-																<li><a href="#">CPUs, Processors</a></li>
-																<li><a href="#">Fans, Heatsinks &amp; Cooling</a></li>
-																<li><a href="#">Graphics, Video Cards</a></li>
-																<li><a href="#">Interface, Add-On Cards</a></li>
-																<li><a href="#">Laptop Replacement Parts</a></li>
-																<li><a href="#">Memory (RAM)</a></li>
-																<li><a href="#">Motherboards</a></li>
-																<li><a href="#">Motherboard &amp; CPU Combos</a></li>
-																<li><a href="#">Motherboard Components &amp; Accs</a></li>
-															</ul>
-														</div><!-- /.col -->
-
-														<div class="col-xs-12 col-sm-12 col-md-4">
-															<h2 class="title">Dekstop Parts</h2>
-															<ul class="links">
-																<li><a href="#">Power Supplies Power</a></li>
-																<li><a href="#">Power Supply Testers Sound</a></li>
-																<li><a href="#">Sound Cards (Internal)</a></li>
-																<li><a href="#">Video Capture &amp; TV Tuner Cards</a></li>
-																<li><a href="#">Other</a></li>
-															</ul>
-														</div><!-- /.col -->
-													</div>
-												</div><!-- /.row -->
-											</div><!-- /.yamm-content -->					</li>
-									</ul>
+									<a href="${createLink(uri: '/')}department/show/2">Computadoras</a>
 								</li>
 
 								<li class="dropdown">
 
-									<a href="index.php?page=category">Electronics
+									<a href="${createLink(uri: '/')}department/show/1">Smart Phones
 										<span class="menu-label hot-menu hidden-xs">hot</span>
 									</a>
 								</li>
 								<li class="dropdown hidden-sm">
 
-									<a href="index.php?page=category">Television
+									<a href="${createLink(uri: '/')}department/show/3">Deportes
 										<span class="menu-label new-menu hidden-xs">new</span>
 									</a>
 								</li>
 
 								<li class="dropdown hidden-sm">
-									<a href="index.php?page=category">Smart Phone</a>
+									<a href="${createLink(uri: '/')}department/show/4">TV & Audio</a>
 								</li>
 
 								<li class="dropdown">
-									<a href="index.php?page=contact">Contact</a>
+									<a href="${createLink(uri: '/')}">Contacto</a>
 								</li>
 
 								<li class="dropdown navbar-right">
 									<a href="#" class="dropdown-toggle" data-hover="dropdown" data-toggle="dropdown">Pages</a>
-									<ul class="dropdown-menu pages">
-										<li>
-											<div class="yamm-content">
-												<div class="row">
-
-													<div class='col-xs-12 col-sm-4 col-md-4'>
-														<ul class='links'>
-															<li><a href="index.php?page=home">Home I</a></li>
-															<li><a href="index.php?page=home2">Home II</a></li>
-															<li><a href="index.php?page=category">Category</a></li>
-															<li><a href="index.php?page=category-2">Category II</a></li>
-															<li><a href="index.php?page=detail">Detail</a></li>
-															<li><a href="index.php?page=detail2">Detail II</a></li>
-															<li><a href="index.php?page=shopping-cart">Shopping Cart Summary</a></li>
-
-														</ul>
-													</div>
-													<div class='col-xs-12 col-sm-4 col-md-4'>
-														<ul class='links'>
-															<li><a href="index.php?page=checkout">Checkout</a></li>
-															<li><a href="index.php?page=blog">Blog</a></li>
-															<li><a href="index.php?page=blog-details">Blog Detail</a></li>
-															<li><a href="index.php?page=contact">Contact</a></li>
-															<li><a href="index.php?page=homepage1">Homepage 1</a></li>
-															<li><a href="index.php?page=homepage2">Homepage 2</a></li>
-															<li><a href="index.php?page=home-furniture">Home Furniture</a></li>
-														</ul>
-													</div>
-													<div class='col-xs-12 col-sm-4 col-md-4'>
-														<ul class='links'>
-															<li><a href="index.php?page=sign-in">Sign In</a></li>
-															<li><a href="index.php?page=my-wishlist">Wishlist</a></li>
-															<li><a href="index.php?page=terms-conditions">Terms and Condition</a></li>
-															<li><a href="index.php?page=track-orders">Track Orders</a></li>
-															<li><a href="index.php?page=product-comparison">Product-Comparison</a></li>
-															<li><a href="index.php?page=faq">FAQ</a></li>
-															<li><a href="index.php?page=404">404</a></li>
-														</ul>
-
-													</div>
-
-												</div>
-											</div>
-										</li>
-
-
-									</ul>
 								</li>
 
 							</ul><!-- /.navbar-nav -->
@@ -486,374 +285,16 @@
 		<div class="row">
 			<div class="col-xs-12 col-sm-12 col-md-3 sidebar">
 				<div class="side-menu animate-dropdown outer-bottom-xs">
-					<div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Categories</div>
+					<div class="head"><i class="icon fa fa-align-justify fa-fw"></i> Departamentos</div>
 					<nav class="yamm megamenu-horizontal" role="navigation">
 						<ul class="nav">
-							<li class="dropdown menu-item">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-desktop fa-fw"></i>Computer</a>
-								<ul class="dropdown-menu mega-menu">
-									<li class="yamm-content">
-										<div class="row">
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Lenovo</a></li>
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Fuhlen</a></li>
-													<li><a href="#">Longsleeves</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Polos</a></li>
-													<li><a href="#">Sweaters</a></li>
-													<li><a href="#">Shirts</a></li>
-													<li><a href="#">Hoodies</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-										</div><!-- /.row -->
-									</li><!-- /.yamm-content -->
-								</ul><!-- /.dropdown-menu -->            </li><!-- /.menu-item -->
+							<%
+								def departments = Department.findAll()
 
-							<li class="dropdown menu-item">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-mobile fa-fw"></i>Smart Phone</a>
-								<!-- ================================== MEGAMENU VERTICAL ================================== -->
-								<ul class="dropdown-menu mega-menu">
-									<li class="yamm-content">
-										<div class="row">
-											<div class="col-xs-12 col-sm-12 col-lg-4">
-												<ul>
-													<li><a href="#">Computer Cases &amp; Accessories</a></li>
-													<li><a href="#">CPUs, Processors</a></li>
-													<li><a href="#">Fans, Heatsinks &amp; Cooling</a></li>
-													<li><a href="#">Graphics, Video Cards</a></li>
-													<li><a href="#">Interface, Add-On Cards</a></li>
-													<li><a href="#">Laptop Replacement Parts</a></li>
-													<li><a href="#">Memory (RAM)</a></li>
-													<li><a href="#">Motherboards</a></li>
-													<li><a href="#">Motherboard &amp; CPU Combos</a></li>
-													<li><a href="#">Motherboard Components &amp; Accs</a></li>
-												</ul>
-											</div>
-
-											<div class="col-xs-12 col-sm-12 col-lg-4">
-												<ul>
-													<li><a href="#">Power Supplies Power</a></li>
-													<li><a href="#">Power Supply Testers Sound</a></li>
-													<li><a href="#">Sound Cards (Internal)</a></li>
-													<li><a href="#">Video Capture &amp; TV Tuner Cards</a></li>
-													<li><a href="#">Other</a></li>
-												</ul>
-											</div>
-
-											<div class="dropdown-banner-holder">
-												<a href="#"><img alt="" src="assets/images/banners/banner-side.png"></a>
-											</div>
-										</div><!-- /.row -->
-									</li><!-- /.yamm-content -->
-								</ul><!-- /.dropdown-menu -->
-							<!-- ================================== MEGAMENU VERTICAL ================================== -->            </li><!-- /.menu-item -->
-
-							<li class="dropdown menu-item">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-apple fa-fw"></i>Apple Store</a>
-								<ul class="dropdown-menu mega-menu">
-									<li class="yamm-content">
-										<div class="row">
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Lenovo</a></li>
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Fuhlen</a></li>
-													<li><a href="#">Longsleeves</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Polos</a></li>
-													<li><a href="#">Sweaters</a></li>
-													<li><a href="#">Shirts</a></li>
-													<li><a href="#">Hoodies</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-										</div><!-- /.row -->
-									</li><!-- /.yamm-content -->
-								</ul><!-- /.dropdown-menu -->            </li><!-- /.menu-item -->
-
-							<li class="dropdown menu-item">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-camera fa-fw"></i>Camera</a>
-								<ul class="dropdown-menu mega-menu">
-									<li class="yamm-content">
-										<div class="row">
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Lenovo</a></li>
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Fuhlen</a></li>
-													<li><a href="#">Longsleeves</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Polos</a></li>
-													<li><a href="#">Sweaters</a></li>
-													<li><a href="#">Shirts</a></li>
-													<li><a href="#">Hoodies</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-										</div><!-- /.row -->
-									</li><!-- /.yamm-content -->
-								</ul><!-- /.dropdown-menu -->            </li><!-- /.menu-item -->
-
-							<li class="dropdown menu-item">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-headphones fa-fw"></i>TV &amp; Audio</a>
-								<ul class="dropdown-menu mega-menu">
-									<li class="yamm-content">
-										<div class="row">
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Lenovo</a></li>
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Fuhlen</a></li>
-													<li><a href="#">Longsleeves</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Polos</a></li>
-													<li><a href="#">Sweaters</a></li>
-													<li><a href="#">Shirts</a></li>
-													<li><a href="#">Hoodies</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-										</div><!-- /.row -->
-									</li><!-- /.yamm-content -->
-								</ul><!-- /.dropdown-menu -->            </li><!-- /.menu-item -->
-
-							<li class="dropdown menu-item">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-gamepad fa-fw"></i>Game &amp; Video</a>
-								<ul class="dropdown-menu mega-menu">
-									<li class="yamm-content">
-										<div class="row">
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Lenovo</a></li>
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Fuhlen</a></li>
-													<li><a href="#">Longsleeves</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Polos</a></li>
-													<li><a href="#">Sweaters</a></li>
-													<li><a href="#">Shirts</a></li>
-													<li><a href="#">Hoodies</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-										</div><!-- /.row -->
-									</li><!-- /.yamm-content -->
-								</ul><!-- /.dropdown-menu -->            </li><!-- /.menu-item -->
-
-							<li class="dropdown menu-item">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-location-arrow fa-fw"></i>Car Electronic</a>
-								<ul class="dropdown-menu mega-menu">
-									<li class="yamm-content">
-										<div class="row">
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Lenovo</a></li>
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Fuhlen</a></li>
-													<li><a href="#">Longsleeves</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Polos</a></li>
-													<li><a href="#">Sweaters</a></li>
-													<li><a href="#">Shirts</a></li>
-													<li><a href="#">Hoodies</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-										</div><!-- /.row -->
-									</li><!-- /.yamm-content -->
-								</ul><!-- /.dropdown-menu -->            </li><!-- /.menu-item -->
-
-							<li class="dropdown menu-item">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-history fa-fw"></i>Old Products</a>
-								<!-- ================================== MEGAMENU VERTICAL ================================== -->
-								<ul class="dropdown-menu mega-menu">
-									<li class="yamm-content">
-										<div class="row">
-											<div class="col-xs-12 col-sm-12 col-lg-4">
-												<ul>
-													<li><a href="#">Computer Cases &amp; Accessories</a></li>
-													<li><a href="#">CPUs, Processors</a></li>
-													<li><a href="#">Fans, Heatsinks &amp; Cooling</a></li>
-													<li><a href="#">Graphics, Video Cards</a></li>
-													<li><a href="#">Interface, Add-On Cards</a></li>
-													<li><a href="#">Laptop Replacement Parts</a></li>
-													<li><a href="#">Memory (RAM)</a></li>
-													<li><a href="#">Motherboards</a></li>
-													<li><a href="#">Motherboard &amp; CPU Combos</a></li>
-													<li><a href="#">Motherboard Components &amp; Accs</a></li>
-												</ul>
-											</div>
-
-											<div class="col-xs-12 col-sm-12 col-lg-4">
-												<ul>
-													<li><a href="#">Power Supplies Power</a></li>
-													<li><a href="#">Power Supply Testers Sound</a></li>
-													<li><a href="#">Sound Cards (Internal)</a></li>
-													<li><a href="#">Video Capture &amp; TV Tuner Cards</a></li>
-													<li><a href="#">Other</a></li>
-												</ul>
-											</div>
-
-											<div class="dropdown-banner-holder">
-												<a href="#"><img alt="" src="assets/images/banners/banner-side.png"></a>
-											</div>
-										</div><!-- /.row -->
-									</li><!-- /.yamm-content -->
-								</ul><!-- /.dropdown-menu -->
-							<!-- ================================== MEGAMENU VERTICAL ================================== -->            </li><!-- /.menu-item -->
-
-							<li class="dropdown menu-item">
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa fa-microphone fa-fw"></i>Accessories</a>
-								<ul class="dropdown-menu mega-menu">
-									<li class="yamm-content">
-										<div class="row">
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Lenovo</a></li>
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Fuhlen</a></li>
-													<li><a href="#">Longsleeves</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Polos</a></li>
-													<li><a href="#">Sweaters</a></li>
-													<li><a href="#">Shirts</a></li>
-													<li><a href="#">Hoodies</a></li>
-												</ul>
-											</div><!-- /.col -->
-											<div class="col-sm-12 col-md-3">
-												<ul class="links list-unstyled">
-													<li><a href="#">Microsoft</a></li>
-													<li><a href="#">Apple</a></li>
-													<li><a href="#">Tees &amp; Tanks</a></li>
-													<li><a href="#">Graphic Tees</a></li>
-												</ul>
-											</div><!-- /.col -->
-										</div><!-- /.row -->
-									</li><!-- /.yamm-content -->
-								</ul><!-- /.dropdown-menu -->            </li><!-- /.menu-item -->
-
+							%>
+							<% for(department in departments){%>
+							<li class="dropdown menu-item"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="icon fa <%= department.icon %> fa-fw"></i><%= department.name %></a></li><!-- /.menu-item -->
+							<%}%>
 						</ul><!-- /.nav -->
 					</nav><!-- /.megamenu-horizontal -->
 				</div>
@@ -865,6 +306,82 @@
 				<g:layoutBody/>
 				<g:pageProperty name="page.content">
 				</g:pageProperty>
+
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+
+				<!-- ============================================== BRANDS CAROUSEL ============================================== -->
+				<div id="brands-carousel" class="logo-slider wow fadeInUp" style="visibility: hidden; -webkit-animation: none;">
+
+					<h3 class="section-title">Nuestras Marcas</h3>
+					<div class="logo-slider-inner">
+						<div id="brand-slider" class="owl-carousel brand-slider custom-carousel owl-theme" style="opacity: 1; display: block;">
+							<div class="owl-wrapper-outer"><div class="owl-wrapper" style="width: 3800px; left: 0px; display: block;"><div class="owl-item" style="width: 190px;"><div class="item m-t-15">
+								<a href="#" class="image">
+									<img data-echo="http://demo.transvelo.com/unicase/assets/images/brands/brand1.png" src="http://demo.transvelo.com/unicase/assets/images/blank.gif" alt="">
+								</a>
+							</div></div><div class="owl-item" style="width: 190px;"><div class="item m-t-10">
+								<a href="#" class="image">
+									<img data-echo="http://demo.transvelo.com/unicase/assets/images/brands/brand2.png" src="http://demo.transvelo.com/unicase/assets/images/blank.gif" alt="">
+								</a>
+							</div></div><div class="owl-item" style="width: 190px;"><div class="item">
+								<a href="#" class="image">
+									<img data-echo="http://demo.transvelo.com/unicase/assets/images/brands/brand3.png" src="http://demo.transvelo.com/unicase/assets/images/blank.gif" alt="">
+								</a>
+							</div></div><div class="owl-item" style="width: 190px;"><div class="item">
+								<a href="#" class="image">
+									<img data-echo="http://demo.transvelo.com/unicase/assets/images/brands/brand4.png" src="http://demo.transvelo.com/unicase/assets/images/blank.gif" alt="">
+								</a>
+							</div></div><div class="owl-item" style="width: 190px;"><div class="item">
+								<a href="#" class="image">
+									<img data-echo="http://demo.transvelo.com/unicase/assets/images/brands/brand5.png" src="http://demo.transvelo.com/unicase/assets/images/blank.gif" alt="">
+								</a>
+							</div></div><div class="owl-item" style="width: 190px;"><div class="item">
+								<a href="#" class="image">
+									<img data-echo="http://demo.transvelo.com/unicase/assets/images/brands/brand6.png" src="http://demo.transvelo.com/unicase/assets/images/blank.gif" alt="">
+								</a>
+							</div></div><div class="owl-item" style="width: 190px;"><div class="item">
+								<a href="#" class="image">
+									<img data-echo="http://demo.transvelo.com/unicase/assets/images/brands/brand2.png" src="http://demo.transvelo.com/unicase/assets/images/blank.gif" alt="">
+								</a>
+							</div></div><div class="owl-item" style="width: 190px;"><div class="item">
+								<a href="#" class="image">
+									<img data-echo="http://demo.transvelo.com/unicase/assets/images/brands/brand4.png" src="http://demo.transvelo.com/unicase/assets/images/blank.gif" alt="">
+								</a>
+							</div></div><div class="owl-item" style="width: 190px;"><div class="item">
+								<a href="#" class="image">
+									<img data-echo="http://demo.transvelo.com/unicase/assets/images/brands/brand1.png" src="http://demo.transvelo.com/unicase/assets/images/blank.gif" alt="">
+								</a>
+							</div></div><div class="owl-item" style="width: 190px;"><div class="item">
+								<a href="#" class="image">
+									<img data-echo="http://demo.transvelo.com/unicase/assets/images/brands/brand5.png" src="http://demo.transvelo.com/unicase/assets/images/blank.gif" alt="">
+								</a>
+							</div></div></div></div><!--/.item-->
+
+						<!--/.item-->
+
+						<!--/.item-->
+
+						<!--/.item-->
+
+						<!--/.item-->
+
+						<!--/.item-->
+
+						<!--/.item-->
+
+						<!--/.item-->
+
+						<!--/.item-->
+
+						<!--/.item-->
+							<div class="owl-controls clickable"><div class="owl-buttons"><div class="owl-prev"></div><div class="owl-next"></div></div></div></div><!-- /.owl-carousel #logo-slider -->
+					</div><!-- /.logo-slider-inner -->
+
+				</div><!-- /.logo-slider -->
+			<!-- ============================================== BRANDS CAROUSEL : END ============================================== -->
 			</div>
 		</div>
 	</div><!-- /.container -->
