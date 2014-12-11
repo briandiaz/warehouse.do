@@ -27,7 +27,7 @@
 		<span class="required-indicator">*</span>
 	</label>
 	<div class="col-md-9">
-		<g:select name="icon" from="${['fa-desktop','fa-mobile','fa-camera','fa-headphones','fa-gamepad', 'fa-car', 'fa-film','fa-book','fa-user','fa-child', 'fa-suitcase','fa-soccer-ball-o']}" noSelection="['Icon': 'Select the Icon']"/>
+		<g:select name="icon" class="form-control" from="${['fa-desktop','fa-mobile','fa-camera','fa-headphones','fa-gamepad', 'fa-car', 'fa-film','fa-book','fa-user','fa-child', 'fa-suitcase','fa-soccer-ball-o']}" noSelection="['Icon': 'Select the Icon']"/>
 	</div>
 </div>
 
