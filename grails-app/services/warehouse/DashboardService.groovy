@@ -15,7 +15,8 @@ class DashboardService {
     }
     //devuelve las compras pendientes de envio
     public static String getpendientes(){
-        return Purchase.findAllByDelivered(false).size().toString();
+        Status st = Status.findByValue(2);
+        return Purchase.findAllByStatus(st).size().toString();
     }
     //devuelve las compras del dia de hoy
     public static String getdaily(){
