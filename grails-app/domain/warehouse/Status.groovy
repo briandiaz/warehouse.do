@@ -9,4 +9,9 @@ class Status {
         name blank:false, unique:true
         value blank:false
     }
+
+    @Override
+    def String toString(){
+        return name
+    }
 }

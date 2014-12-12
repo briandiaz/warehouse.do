@@ -107,7 +107,7 @@
 				<div class="category-product  inner-top-vs">
 					<div class="row">
 						<% for(item in itemDepartment){ %>
-						<div class="col-sm-6 col-md-4 wow fadeInUp animated" style="visibility: visible; -webkit-animation: fadeInUp;">
+						<div class="col-sm-6 col-md-4 wow fadeInUp animated">
 							<div class="products">
 
 								<div class="product">
@@ -127,8 +127,11 @@
 
 										<div class="product-price">
 											<span class="price">
-												$<%= item.price %>             </span>
-											<span class="price-before-discount">$ <%= (item.price+(item.price*0.4)) %></span>
+												$<%= item.price.toString() %>
+											</span>
+											<span class="price-before-discount">
+												$ <%= item.grand_total().toString() %>
+											</span>
 
 										</div><!-- /.product-price -->
 
@@ -170,9 +173,9 @@
 
 			<div class="tab-pane " id="list-container">
 				<div class="category-product  inner-top-vs">
-					<g:each in="${itemDeparment}" status="i" var="item">
+					<% for(item in itemDepartment){ %>
 
-					<div class="category-product-inner wow fadeInUp animated" style="visibility: visible; -webkit-animation: fadeInUp;">
+					<div class="category-product-inner wow fadeInUp animated" >
 						<div class="products">
 							<div class="product-list product">
 								<div class="row product-list-row">
@@ -214,7 +217,7 @@
 								<div class="tag new"><span>new</span></div>        </div><!-- /.product-list -->
 						</div><!-- /.products -->
 					</div><!-- /.category-product-inner -->
-					</g:each>
+					<%}%>
 				</div><!-- /.category-product -->
 			</div><!-- /.tab-pane #list-container -->
 		</div><!-- /.tab-content -->

@@ -7,4 +7,9 @@ class Country {
     static constraints = {
         name blank:false, unique: true
     }
+
+    @Override
+    def String toString(){
+        return name
+    }
 }

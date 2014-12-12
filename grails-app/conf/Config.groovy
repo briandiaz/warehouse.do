@@ -89,6 +89,16 @@ environments {
     development {
         grails.logging.jul.usebridge = true
     }
+    grails {
+        mail {
+            host = "smtp.host809.com"
+            port = 587
+            username = "camacho@host809.com"
+            password = "camacho123"
+            props = ["mail.smtp.host":"mail.host809.com",
+                     "mail.smtp.port":"587"]
+        }
+    }
     production {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"
@@ -129,6 +139,36 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
 	'/**/css/**':                     ['permitAll'],
 	'/**/images/**':                  ['permitAll'],
 	'/**/favicon.ico':                ['permitAll'],
-    '/**':                ['ROLE_ADMIN'],
+    '/**':                            ['ROLE_ADMIN'],
+    '/user/**':                       ['ROLE_ADMIN','ROLE_USUARIO','ROLE_CLIENTE'],
+    '/item/**':                       ['permitAll'],
+    '/department/**':                 ['permitAll'],
+    '/cart/**':                       ['ROLE_ADMIN','ROLE_USUARIO','ROLE_CLIENTE'],
+    '/payment/**':                    ['ROLE_ADMIN','ROLE_USUARIO','ROLE_CLIENTE'],
 ]
 
+grails {
+    plugin {
+        selfie {
+            storage {
+                bucket = 'uploads'
+                providerOptions {
+                    provider = 'local' // Switch to s3 if you wish to use s3 and install the karman-aws plugin
+                    basePath = 'storage'
+                    baseUrl  = 'http://localhost:8080/image-test/storage'
+                    //accessKey = "KEY" //Used for S3 Provider
+                    //secretKey = "KEY" //Used for S3 Provider
+                }
+            }
+        }
+    }
+}
+grails {
+    plugin {
+        karman {
+            serveLocalStorage = true
+            serveLocalMapping = 'storage' // means /storage is base path
+            storagePath = 'storage'
+        }
+    }
+}

@@ -44,6 +44,9 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://repository.codehaus.org"
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
+        //mavenRepo 'http://dl.bintray.com/karman/karman'
+        //mavenRepo "http://repo.grails.org/grails/core"
+
     }
 
     dependencies {
@@ -62,11 +65,16 @@ grails.project.dependency.resolution = {
         compile ':cache:1.1.8'
         compile ":asset-pipeline:1.9.9"
         compile ':spring-security-core:2.0-RC4'
+        //compile ":karman:0.6.1"
+        //compile ":selfie:0.5.0"
+        compile ":mail:1.0.7"
+
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"
         runtime ":jquery:1.11.1"
         runtime ':twitter-bootstrap:3.3.1'
+
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"

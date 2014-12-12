@@ -17,13 +17,13 @@ class Person {
     static constraints = {
         first_name blank:false
         last_name blank: false
-        phone nullable: true
+        phone nullable: false
         mobile nullable: true
-        consumerType blank:false
-        user blank:false, unique: true
+        consumerType blank:false, nullable: false
+        user nullable: true
         company nullable: true
-        country nullable: true
-        city nullable: true
+        country nullable: false
+        city nullable: false
         address1 blank:false
         address2 nullable: true
 

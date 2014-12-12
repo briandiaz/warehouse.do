@@ -40,4 +40,9 @@ class User {
     protected void encodePassword() {
         password = springSecurityService?.passwordEncoder ? springSecurityService.encodePassword(password) : password
     }
+
+    @Override
+    def String toString(){
+        return username + " " + email
+    }
 }

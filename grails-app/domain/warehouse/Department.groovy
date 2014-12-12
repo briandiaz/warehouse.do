@@ -8,4 +8,9 @@ class Department {
 
     static constraints = {
     }
+
+    @Override
+    def String toString(){
+        return name
+    }
 }

@@ -12,7 +12,14 @@ class BusinessLogicService {
 
     }
     def static authenticated(){
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        return auth;
+        return SecurityContextHolder.getContext().getAuthentication();
+    }
+
+    def static session(){
+        return User.findByUsername(authenticated().getName());
+    }
+
+    def static is_authenticated(){
+        return (authenticated().getName().toString() != "__grails.anonymous.user__");
     }
 }
