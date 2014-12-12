@@ -32,6 +32,8 @@ class Purchase {
     String address_city;
     String address_zip;
 
+    boolean delivered;
+    boolean received;
     static constraints = {
     }
 }

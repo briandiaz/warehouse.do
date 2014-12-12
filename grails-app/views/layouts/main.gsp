@@ -1,4 +1,4 @@
-<%@ page import="warehouse.BusinessLogicService; warehouse.Department; warehouse.User" %>
+<%@ page import="warehouse.DashboardService; warehouse.BusinessLogicService; warehouse.Department; warehouse.User" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,6 +53,46 @@
 			<script src="${createLink(uri: '/')}assets/js/respond.min.js"></script>
 		<![endif]-->
 
+
+	<!-- graficas-->
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+		google.load("visualization", "1", {packages:["corechart"]});
+		google.setOnLoadCallback(drawPieChart);
+		function drawPieChart() {
+			var data1 = google.visualization.arrayToDataTable([
+				['Total', 'Hours per Day'],
+				['Realizadas',     <%= warehouse.DashboardService.getrealizadas() %>],
+				['Pendientes',      <%= DashboardService.getpendientes() %>],
+				['Hoy',    <%= DashboardService.getdaily() %>]
+			]);
+			var options = {
+				title: 'Compras',
+				'width':400,
+				'height':400
+			};
+			var chart1 = new google.visualization.PieChart(document.getElementById('piechart'));
+			chart1.draw(data1, options);
+		}
+	</script>
+
+	<script type="text/javascript">
+		google.load("visualization", "1", {packages:["corechart"]});
+		google.setOnLoadCallback(drawChart);
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable([
+				['Compras', 'Total', 'Pendientes','Hoy'],
+				['Compras',  <%=DashboardService.getrealizadas()%>,<%=DashboardService.getpendientes()%> ,<%=DashboardService.getdaily()%>]
+			]);
+			var options = {
+				title: 'Compras',
+				'width':400,
+				'height':400
+			};
+			var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+			chart.draw(data, options);
+		}
+	</script>
 </head>
 <body class="cnt-home">
 

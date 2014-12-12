@@ -14,7 +14,14 @@
 
                                 <div class="row">
                                     <div class="">
-
+                                        <div class="col-md-12">
+                                            <div class="col-md-6" >
+                                                <div id="chart_div" ></div>
+                                            </div>
+                                            <div class="col-md-6" >
+                                                <div id="piechart"></div>
+                                            </div>
+                                        </div>
                                         <table class="table table-striped table-hover ">
                                             <thead>
                                             <tr>

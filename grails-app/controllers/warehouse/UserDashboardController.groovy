@@ -1,6 +1,6 @@
 package warehouse
 
-class DashboardController {
+class UserDashboardController {
 
     def index() {}
 }
