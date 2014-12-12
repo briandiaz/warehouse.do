@@ -145,6 +145,13 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
     '/department/**':                 ['permitAll'],
     '/cart/**':                       ['ROLE_ADMIN','ROLE_USUARIO','ROLE_CLIENTE'],
     '/payment/**':                    ['ROLE_ADMIN','ROLE_USUARIO','ROLE_CLIENTE'],
+    '/person/**':                     ['permitAll'],
+    '/department/create':                       ['ROLE_ADMIN','ROLE_USUARIO'],
+    '/item/create':                       ['ROLE_ADMIN','ROLE_USUARIO'],
+    '/status/create':                       ['ROLE_ADMIN','ROLE_USUARIO'],
+    '/department/delete':                       ['ROLE_ADMIN'],
+    '/item/delete':                       ['ROLE_ADMIN'],
+    '/status/delete':                       ['ROLE_ADMIN'],
 ]
 
 grails {

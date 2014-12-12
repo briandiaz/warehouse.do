@@ -3,11 +3,11 @@
 <g:set var="entityName" value="${message(code: 'item.label', default: 'Item')}" />
 <g:applyLayout name="main">
 	<%
-		def photo_1 = 'http://localhost:8080/warehouse/item/viewImage/?id=1&photo_id=1'
-		def photo_2 = 'http://localhost:8080/warehouse/item/viewImage/?id=1&photo_id=2'
-		def photo_3 = 'http://localhost:8080/warehouse/item/viewImage/?id=1&photo_id=3'
-		def photo_4 = 'http://localhost:8080/warehouse/item/viewImage/?id=1&photo_id=4'
-		def photo_5 = 'http://localhost:8080/warehouse/item/viewImage/?id=1&photo_id=5'
+		def photo_1 = 'http://localhost:8080/warehouse/item/viewImage/?id='+itemInstance?.id+'&photo_id=1'
+		def photo_2 = 'http://localhost:8080/warehouse/item/viewImage/?id='+itemInstance?.id+'&photo_id=2'
+		def photo_3 = 'http://localhost:8080/warehouse/item/viewImage/?id='+itemInstance?.id+'&photo_id=3'
+		def photo_4 = 'http://localhost:8080/warehouse/item/viewImage/?id='+itemInstance?.id+'&photo_id=4'
+		def photo_5 = 'http://localhost:8080/warehouse/item/viewImage/?id='+itemInstance?.id+'&photo_id=5'
 	%>
 	<content tag="content">
 		<div class="row single-product outer-bottom-sm ">
@@ -159,25 +159,27 @@
 							<div class="quantity-container info-container">
 								<div class="row">
 
-									<div class="col-sm-2">
-										<span class="label">Qty :</span>
-									</div>
+									<form action="http://localhost:8080/warehouse/cart/additemtocart/" method="GET">
+										<input type="hidden" value="<%= itemInstance?.id %>" name="item_id" id="item_id">
+										<div class="col-sm-2">
+											<span class="label">Qty :</span>
+										</div>
 
-									<div class="col-sm-2">
-										<div class="cart-quantity">
-											<div class="quant-input">
-												<div class="arrows">
-													<div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
-													<div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
+										<div class="col-sm-2">
+											<div class="cart-quantity">
+												<div class="quant-input">
+													<div class="arrows">
+														<div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
+														<div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
+													</div>
+													<input type="text" value="1" name="quantity" id="quantity">
 												</div>
-												<input type="text" value="1">
 											</div>
 										</div>
-									</div>
-
-									<div class="col-sm-7">
-										<a href="#" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</a>
-									</div>
+										<div class="col-sm-7">
+											<button type="submit" class="btn btn-primary"><i class="fa fa-shopping-cart inner-right-vs"></i> ADD TO CART</button>
+										</div>
+									</form>
 
 
 								</div><!-- /.row -->

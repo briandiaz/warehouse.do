@@ -11,7 +11,6 @@ class ItemController {
 
     def viewImage = {
         def photo_id = params.photo_id
-        println(params)
         def item =Item.findById(params.id)
         byte[] image
         if(photo_id == 1.toString())

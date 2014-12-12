@@ -9,6 +9,13 @@ class CartController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    def additemtocart = {
+        def item = Item.findById(params.item_id)
+        def cart = Cart.findByOwner(BusinessLogicService.session())
+        def cart_items = new Cart_Items(cart: cart,item: item, quantity: params.quantity).save(failOnError: true)
+        redirect(action:index(1))
+    }
+
     def index(Integer max) {
         def auth_name = BusinessLogicService.authenticated().getName();
         def user = User.findByUsername(auth_name);
@@ -17,9 +24,11 @@ class CartController {
         def sub_total = 0;
         def grand_total = 0;
         for(item in cartItems){
-            sub_total += item.item.sub_total();
-            grand_total += item.item.grand_total();
+            sub_total += item.item.sub_total() * item.quantity;
+            grand_total += item.item.grand_total()* item.quantity;
         }
+        sub_total = Math.round(sub_total * 100) / 100;
+        grand_total = Math.round(grand_total * 100) / 100;
         respond cart, model: [cartItems: cartItems, grand_total: grand_total, sub_total: sub_total]
     }
 

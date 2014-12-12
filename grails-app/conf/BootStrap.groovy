@@ -1,3 +1,5 @@
+import warehouse.Area
+import warehouse.Area_User
 import warehouse.Cart
 import warehouse.Consumer_Type
 import warehouse.Country
@@ -26,12 +28,15 @@ class BootStrap {
 
         def admin=new User(username: "admin", password: "admin", email:"brian@briandiaz.me").save(failOnError: true);
         def user =new User(username: "brian", password: "12345", email:"briandiaz@outlook.com").save(failOnError: true);
+        def fr =new User(username: "frangel", password: "12345", email:"info@host809.com").save(failOnError: true);
 
         def personAdmin = new Person(first_name: "Administrador", last_name: "Root", phone: "111-000-1010", mobile: "000-111-0101", consumerType: consumerTypeConsumer, country: country, city: "Root", address1: "Root", user: admin).save(failOnError: true);
         def personUser = new Person(first_name: "Brian Enmanuel", last_name: "Díaz Peña", phone: "809-576-0856", mobile: "829-616-2714", consumerType: consumerTypePerson, country: country, city: "Santiago de los Caballeros", address1: "La Zurza 2, Calle 8, Casa 38", user: user).save(failOnError: true);
+        def personFR = new Person(first_name: "Frangel", last_name: "Hernández", phone: "809-971-0856", mobile: "829-241-2714", consumerType: consumerTypeEnterprise, country: country, city: "Santiago de los Caballeros", address1: "Cienfuegos", user: fr).save(failOnError: true);
 
         def cart = new Cart(owner: admin).save(failOnError: true);
         cart = new Cart(owner: user).save(failOnError: true);
+        cart = new Cart(owner: fr).save(failOnError: true);
 
         def department = new Department(name: "Smartphones", icon: "fa-mobile", description: "iPhone, Samsung, Nokia, Alcatel, etc..").save(failOnError: true);
         department = new Department(name: "Computadoras", icon: "fa-desktop", description: "Hasta un 50% de descuento!").save(failOnError: true);
@@ -48,8 +53,17 @@ class BootStrap {
         def ncf = new NCF_Type(name: "Con Comprobante Fiscal").save(failOnError: true);
         ncf = new NCF_Type(name: "Sin Comprobante Fiscal").save(failOnError: true);
 
+        def area_w = new Area(name: "Warehouse").save(failOnError: true);
+        def area_s = new Area(name: "Sales").save(failOnError: true);
+        def area_g = new Area(name: "Generic").save(failOnError: true);
+
+        def userArea = new Area_User(user: admin, area: area_g).save(failOnError: true);
+        userArea = new Area_User(user: user, area: area_w).save(failOnError: true);
+        userArea = new Area_User(user: fr, area: area_s).save(failOnError: true);
+
         UserRole.create(admin, roleAdmin, true);
         UserRole.create(user, roleUsuario, true);
+        UserRole.create(fr, roleUsuario, true);
 
     }
     def destroy = {

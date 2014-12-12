@@ -28,4 +28,9 @@ class Person {
         address2 nullable: true
 
     }
+
+    @Override
+    def String toString(){
+        first_name + " " + last_name
+    }
 }

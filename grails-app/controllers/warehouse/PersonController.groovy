@@ -8,6 +8,7 @@ import grails.transaction.Transactional
 class PersonController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def mailService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -33,10 +34,26 @@ class PersonController {
             respond personInstance.errors, view: 'create'
             return
         }
-        def user = new User(username: params.username, email: params.email, password: params.password)
+        def user = new User(username: params.username, email: params.email, password: params.password).save(failOnError: true)
         personInstance.user = user
         personInstance.save flush: true
-
+        def roleClient = Role.findByName("Cliente");
+        UserRole.create(user, roleClient, true);
+        mailService.sendMail {
+            to user.email
+            subject "Welcome to WareHouse.Do"
+            html "<i>Dear "+personInstance+"</i>\n" +
+                    "<br/>\n" +
+                    "Welcome to <a href=\"http://localhost:8080/warehouse/\">WareHouse.DO</a>\n" +
+                    "<br/>\n" +
+                    "To sign in at the <a href=\"http://localhost:8080/warehouse/person/create\">site</a> this are your credentials:\n" +
+                    "<br/>\n" +
+                    "<br/>\n" +
+                    "<b>username:</b> " + user.username +
+                    "<b>password:</b> " + user.password +
+                    "<br/><br/><br/>\n" +
+                    "Thanks."
+        }
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'person.label', default: 'Person'), personInstance.id])

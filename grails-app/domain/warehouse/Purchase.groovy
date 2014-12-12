@@ -2,7 +2,8 @@ package warehouse
 
 class Purchase {
 
-    User user
+    Cart cart
+    def items
     String ncf
     NCF_Type ncf_type
     Status status

@@ -4,7 +4,7 @@ class Item {
 
     String name
     String description
-    Float price
+    BigDecimal price
     Integer reorder
     Department department
     User publisher

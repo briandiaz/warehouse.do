@@ -1,5 +1,5 @@
 
-<%@ page import="warehouse.NCF_Type; warehouse.Cart" %>
+<%@ page import="warehouse.NCF_Type; warehouse.Cart; warehouse.Cart_Items" %>
 <g:set var="entityName" value="${message(code: 'cart.label', default: 'Carrito de Compras')}" />
 <g:applyLayout name="main">
 
@@ -34,14 +34,13 @@
 							<g:each in="${cartItems}" status="i" var="item">
 							<tr>
 								<td class="cart-image">
-									<g:link controller="item" action="show" id="${item?.id}">
-										<img src="assets/images/products/shopping_cart_01.jpg" alt="">
-									</g:link>
+										<img class="img-responsive" src="http://localhost:8080/warehouse/item/viewImage/?id=<%= item?.item?.id %>&photo_id=1" alt="">
+
 								</td>
 								<td class="cart-product-name-info">
-									<h4 class="cart-product-description"><g:link controller="item" action="show" id="${item?.id}"><%= item.name %></g:link></h4>
+									<h4 class="cart-product-description"><%= item?.item?.name %></h4>
 									<div class="cart-product-info">
-										<span class="product-imel">Descripción:<span><%= item.description %></span></span><br>
+										<span class="product-imel">Descripción:<span><%= item?.item?.description %></span></span><br>
 									</div>
 								</td>
 								<td class="cart-product-quantity">
@@ -50,57 +49,29 @@
 											<div class="arrow plus gradient"><span class="ir"><i class="icon fa fa-sort-asc"></i></span></div>
 											<div class="arrow minus gradient"><span class="ir"><i class="icon fa fa-sort-desc"></i></span></div>
 										</div>
-										<input type="text" value="1">
+										<input type="text" value="<%= item?.quantity %>">
 									</div>
 								</td>
-								<td class="cart-product-sub-total"><span class="cart-sub-total-price">$<%= item.sub_total() %></span></td>
-								<td class="cart-product-grand-total"><span class="cart-grand-total-price">$<%= item.grand_total() %></span></td>
+								<td class="cart-product-sub-total"><span class="cart-sub-total-price">$<%= item?.item?.sub_total() %></span></td>
+								<td class="cart-product-grand-total"><span class="cart-grand-total-price">$<%= item?.item?.grand_total() %></span></td>
 							</tr>
 							</g:each>
 
 							</tbody><!-- /tbody -->
 						</table><!-- /table -->
 					</div>
-				</div><!-- /.shopping-cart-table -->				<div class="col-md-4 col-sm-12 estimate-ship-tax">
-				<table class="table table-bordered">
-					<thead>
-					<tr>
-						<th>
-							<span class="estimate-title">Tipo de Factura</span>
-							<p>Elige tu tipo de factura.</p>
-						</th>
-					</tr>
-					</thead><!-- /thead -->
-					<tbody>
-					<tr>
-						<td>
-							<div class="form-group">
-								<label class="info-title control-label">NCF <span>*</span></label>
+				</div><!-- /.shopping-cart-table -->
 
-								<select name=""  class="form-control unicase-form-control selectpicker" style="display: none;">
-									<option>--Selecciona el tipo de factura--</option>
-									<% for(item in NCF_Type.list()){ %>
-									<option value="<%= item.id %>"><%= item.name %></option>
-									<% } %>
-								</select>
-							</div>
-						</td>
-					</tr>
-					</tbody>
-				</table>
-			</div><!-- /.estimate-ship-tax -->
-
-
-				<div class="col-md-4 col-sm-12 cart-shopping-total">
+				<div class="col-md-offset-6 col-md-6 col-sm-12 cart-shopping-total">
 					<table class="table table-bordered">
 						<thead>
 						<tr>
 							<th>
 								<div class="cart-sub-total">
-									Subtotal<span class="inner-left-md">$<%= sub_total %></span>
+									SubTotal<span class="inner-left-md">$<%= sub_total %></span>
 								</div>
 								<div class="cart-grand-total">
-									Grand Total<span class="inner-left-md">$<%= grand_total %></span>
+									Total<span class="inner-left-md">$<%= grand_total %></span>
 								</div>
 							</th>
 						</tr>
@@ -109,8 +80,38 @@
 						<tr>
 							<td>
 								<div class="cart-checkout-btn pull-right">
-									<button type="submit" class="btn btn-primary">PROCCED TO CHEKOUT</button>
-									<span class="">Checkout with multiples address!</span>
+									<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+										<div class="form-group">
+											<label class="info-title control-label">NCF <span>*</span></label>
+
+											<select  class="form-control unicase-form-control selectpicker" >
+												<option>--Selecciona el tipo de factura--</option>
+												<% for(item in NCF_Type.list()){ %>
+												<option value="<%= item.id %>"><%= item.name %></option>
+												<% } %>
+											</select>
+											<input type="text" class="form-control" id="invoice" name="invoice" value="FA1234" required="required">
+										</div>
+										<input type="hidden" name="cmd" value="_xclick">
+										<input type="hidden" name="business" value="giareloaded07@gmail.com">
+										<input type="hidden" name="currency_code" value="USD">
+										<input type="hidden" name="upload" value="1">
+										<input type="hidden" name="cbt" value="Realizar Compra WareHouse.do"> %{--  --}%
+										<input type="hidden" name="rm" value="2"> %{--Indicando que haga un redirect por el metodo POST--}%
+										<input type="hidden" name="return" value="http://localhost:8080/warehouse/payment/processPayment">
+										<input type="hidden" name="cancel_return" value="http://localhost:8080/warehouse/payment/cancelledPayment">
+
+										<% def description = "";
+											for(item in cartItems){
+												description +=item?.item?.name + " \r\n";
+										    }%>
+										<input type="hidden" id="item_name" name="item_name" value="<%= description %>">
+										<input type="hidden" id=amount" name="amount" value="<%= grand_total %>">
+
+										<button type="submit" class="btn btn-link">
+											<img src="https://www.paypalobjects.com/webstatic/mktg/logo/AM_mc_vs_dc_ae.jpg" alt="Pay">
+										</button>
+									</form>
 								</div>
 							</td>
 						</tr>
