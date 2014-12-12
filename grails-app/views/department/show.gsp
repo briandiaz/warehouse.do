@@ -113,7 +113,7 @@
 								<div class="product">
 									<div class="product-image">
 										<div class="image">
-											<g:link controller="item" action="show" id="${item?.id}"><img src="http://demo.transvelo.com/unicase/assets/images/products/3.jpg" alt=""></g:link>
+											<g:link controller="item" action="show" id="${item?.id}"><img src="http://localhost:8080/warehouse/item/viewImage/?id=<%=item?.id%>&photo_id=1" alt="" class="img-responsive"></g:link>
 										</div><!-- /.image -->
 
 										<div class="tag new"><span>new</span></div>
@@ -143,7 +143,7 @@
 													<button class="btn btn-primary icon" data-toggle="dropdown" type="button">
 														<i class="fa fa-shopping-cart"></i>
 													</button>
-													<button class="btn btn-primary" type="button">Add to cart</button>
+													<a class="btn btn-primary" href="http://localhost:8080/warehouse/cart/additemtocart/?item_id=<%= item?.id %>&quantity=1">Add to cart</a>
 
 												</li>
 

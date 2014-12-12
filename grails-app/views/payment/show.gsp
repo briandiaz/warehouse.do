@@ -1,44 +1,45 @@
+<g:applyLayout name="main">
 
-<%@ page import="warehouse.Payment" %>
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta name="layout" content="main">
-		<g:set var="entityName" value="${message(code: 'payment.label', default: 'Payment')}" />
-		<title><g:message code="default.show.label" args="[entityName]" /></title>
-	</head>
-	<body>
-		<a href="#show-payment" class="skip" tabindex="-1"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-		<div class="nav" role="navigation">
-			<ul>
-				<li><a class="home" href="${createLink(uri: '/')}"><g:message code="default.home.label"/></a></li>
-				<li><g:link class="list" action="index"><g:message code="default.list.label" args="[entityName]" /></g:link></li>
-				<li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
-			</ul>
+	<content tag="content">
+
+		<div class="row">
+			<div class="col-md-12">
+
+				<table class="table table-striped table-hover ">
+					<thead>
+					<tr>
+
+						<th>Usuario</th>
+						<th>NCF</th>
+						<th>Amount</th>
+						<th>Nombre</th>
+						<th>Invoice#</th>
+						<th>Status</th>
+						<th>Tax</th>
+						<th>shipping</th>
+						<th>Date</th>
+						<th>Generate</th>
+					</tr>
+					</thead>
+
+					<tr class="info">
+						<td><span><%=paymentInstance.purchase.cart.owner.username %></span>  </td>
+						<td><span><%=paymentInstance.purchase.ncf%></span>  </td>
+						<td><span><%=paymentInstance.purchase.nombre%></span>  </td>
+						<td><span><%=paymentInstance.purchase.purchase_amount%></span>  </td>
+						<td><span><%=paymentInstance.purchase.factura%></span>  </td>
+						<td><span><%=paymentInstance.purchase.status.name%></span>  </td>
+						<td><span><%=paymentInstance.purchase.tax%></span>  </td>
+						<td><span><%=paymentInstance.purchase.shipping%></span>  </td>
+						<td><span><%=paymentInstance.purchase.date.toGMTString()%></span>  </td>
+						<td><a href="http://localhost:8080/warehouse/payment/generatepdf?factura=<%= paymentInstance.purchase.factura %>" class="btn btn-danger btn-md"><i class="fa fa-file-pdf-o"></i> Generate PDF</a></td>
+					</tr>
+
+				</tbody>
+				</table>
+
+			</div>
+
 		</div>
-		<div id="show-payment" class="content scaffold-show" role="main">
-			<h1><g:message code="default.show.label" args="[entityName]" /></h1>
-			<g:if test="${flash.message}">
-			<div class="message" role="status">${flash.message}</div>
-			</g:if>
-			<ol class="property-list payment">
-			
-				<g:if test="${paymentInstance?.purchase}">
-				<li class="fieldcontain">
-					<span id="purchase-label" class="property-label"><g:message code="payment.purchase.label" default="Purchase" /></span>
-					
-						<span class="property-value" aria-labelledby="purchase-label"><g:link controller="purchase" action="show" id="${paymentInstance?.purchase?.id}">${paymentInstance?.purchase?.encodeAsHTML()}</g:link></span>
-					
-				</li>
-				</g:if>
-			
-			</ol>
-			<g:form url="[resource:paymentInstance, action:'delete']" method="DELETE">
-				<fieldset class="buttons">
-					<g:link class="edit" action="edit" resource="${paymentInstance}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
-					<g:actionSubmit class="delete" action="delete" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
-				</fieldset>
-			</g:form>
-		</div>
-	</body>
-</html>
+	</content>
+</g:applyLayout>

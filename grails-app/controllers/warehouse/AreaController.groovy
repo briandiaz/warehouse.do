@@ -8,6 +8,7 @@ import grails.transaction.Transactional
 class AreaController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def mailService
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -20,6 +21,30 @@ class AreaController {
 
     def create() {
         respond new Area(params)
+    }
+
+    def changePurchaseStatus(){
+        Purchase purchase = Purchase.findById(params.purchase_id);
+        Status status = Status.findById(params.status_id);
+        User user = purchase.cart.owner;
+        def items = []
+
+        purchase.status= status;
+        purchase.save flush: true;
+
+        mailService.sendMail {
+            from "giareloaded07@gmail.com"
+            to user.email
+            subject "Thanks for buying at WareHouse.Do"
+            html "<i>Your order is completed.</i>\n" +
+                    "<br/>\n" +
+                    "<a href=\"http://localhost:8080/warehouse/\">WareHouse.DO</a>\n" +
+                    "<br/>\n"
+            "Your items are :<br/>"+ purchase.items +
+                    "<br/>\n" +
+                    "Your invoice is <a href='http://localhost:8080/warehouse/payment/show/"+purchase.id+"'>"+purchase.factura+"</a>\n" +
+                    "Thanks."
+        }
     }
 
     @Transactional

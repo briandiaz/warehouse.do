@@ -1,4 +1,4 @@
-<%@ page import="warehouse.BusinessLogicService; warehouse.Department; warehouse.User" %>
+<%@ page import="warehouse.DashboardService; warehouse.BusinessLogicService; warehouse.Department; warehouse.User" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,6 +53,46 @@
 			<script src="${createLink(uri: '/')}assets/js/respond.min.js"></script>
 		<![endif]-->
 
+
+	<!-- graficas-->
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript">
+		google.load("visualization", "1", {packages:["corechart"]});
+		google.setOnLoadCallback(drawPieChart);
+		function drawPieChart() {
+			var data1 = google.visualization.arrayToDataTable([
+				['Total', 'Hours per Day'],
+				['Realizadas',     <%= warehouse.DashboardService.getrealizadas() %>],
+				['Pendientes',      <%= DashboardService.getpendientes() %>],
+				['Hoy',    <%= DashboardService.getdaily() %>]
+			]);
+			var options = {
+				title: 'Compras',
+				'width':400,
+				'height':400
+			};
+			var chart1 = new google.visualization.PieChart(document.getElementById('piechart'));
+			chart1.draw(data1, options);
+		}
+	</script>
+
+	<script type="text/javascript">
+		google.load("visualization", "1", {packages:["corechart"]});
+		google.setOnLoadCallback(drawChart);
+		function drawChart() {
+			var data = google.visualization.arrayToDataTable([
+				['Compras', 'Total', 'Pendientes','Hoy'],
+				['Compras',  <%=DashboardService.getrealizadas()%>,<%=DashboardService.getpendientes()%> ,<%=DashboardService.getdaily()%>]
+			]);
+			var options = {
+				title: 'Compras',
+				'width':400,
+				'height':400
+			};
+			var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+			chart.draw(data, options);
+		}
+	</script>
 </head>
 <body class="cnt-home">
 
@@ -68,17 +108,18 @@
 				<div class="cnt-account">
 					<ul class="list-unstyled">
 						<% if(BusinessLogicService.is_authenticated()) {%>
-						<li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
 						<li><a href="${createLink(uri: '/')}cart"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-						<li><g:link controller="user" action="logout" ><i class="icon fa fa-key"></i>LogOut</g:link></li>
-						<% } %>
+						<li><a href="${createLink(uri: '/')}userDashboard/"><i class="icon fa fa-key"></i>History</a></li>
 						<% if(BusinessLogicService.session().username == "admin") {%>
-						<li><a href="${createLink(uri: '/')}item/create"><i class="icon fa fa-user"></i>Create Item</a></li>
-						<li><a href="${createLink(uri: '/')}department/create"><i class="icon fa fa-shopping-cart"></i>Create Departament</a></li>
-						<li><a href="${createLink(uri: '/')}area/create"><i class="icon fa fa-key"></i>Create Area</a></li>
-						<li><a href="${createLink(uri: '/')}area/show/1"><i class="icon fa fa-key"></i>Item to be Delivered</a></li>
-						<li><a href="${createLink(uri: '/')}payment/"><i class="icon fa fa-key"></i>Payments</a></li>
-						<% } %>
+							<li><a href="${createLink(uri: '/')}item/create"><i class="icon fa fa-user"></i>Create Item</a></li>
+							<li><a href="${createLink(uri: '/')}department/create"><i class="icon fa fa-shopping-cart"></i>Create Departament</a></li>
+							<li><a href="${createLink(uri: '/')}area/create"><i class="icon fa fa-key"></i>Create Area</a></li>
+							<li><a href="${createLink(uri: '/')}area/show/1"><i class="icon fa fa-key"></i>Item to be Delivered</a></li>
+							<li><a href="${createLink(uri: '/')}payment/"><i class="icon fa fa-key"></i>Payments</a></li>
+						<li><a href="${createLink(uri: '/')}adminDashboard/"><i class="icon fa fa-key"></i>History</a></li>
+							<% } %>
+							<li><g:link controller="user" action="logout" ><i class="icon fa fa-key"></i>LogOut</g:link></li>
+						<%	} %>
 						<% if(!BusinessLogicService.is_authenticated()) {%>
 							<li><a href="${createLink(uri: '/')}login/auth"><i class="icon fa fa-sign-in"></i>Login</a></li>
 						<% } %>
