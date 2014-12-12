@@ -151,6 +151,10 @@
     <servlet-name>grails-errorhandler</servlet-name>
     <servlet-class>org.codehaus.groovy.grails.web.servlet.ErrorHandlingServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>image</servlet-name>
+    <servlet-class>net.sf.jasperreports.j2ee.servlets.ImageServlet</servlet-class>
+  </servlet>
 
     <servlet-mapping>
         <servlet-name>gsp</servlet-name>
@@ -159,6 +163,10 @@
   <servlet-mapping>
     <servlet-name>grails-errorhandler</servlet-name>
     <url-pattern>/grails-errorhandler</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>image</servlet-name>
+    <url-pattern>/reports/image</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>grails</servlet-name>

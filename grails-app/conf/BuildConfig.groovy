@@ -68,7 +68,7 @@ grails.project.dependency.resolution = {
         //compile ":karman:0.6.1"
         //compile ":selfie:0.5.0"
         compile ":mail:1.0.7"
-
+        compile ":jasper:1.10.0"
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
         runtime ":database-migration:1.4.0"

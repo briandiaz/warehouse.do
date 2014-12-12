@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 5.6.2.final using JasperReports Library version 5.6.1  -->
+<!-- 2014-12-12T13:42:13 -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="PruebaReporte" pageWidth="612" pageHeight="792" whenNoDataType="AllSectionsNoDetail" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="906f7d15-275b-4015-ad00-82a043c6a1b1">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<parameter name="factura" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[select * from purchase where factura= $P{factura}]]>
+	</queryString>
+	<field name="factura" class="java.lang.String"/>
+	<field name="estatusPago" class="java.lang.String"/>
+	<field name="address_name" class="java.lang.String"/>
+	<field name="address_state" class="java.lang.String"/>
+	<field name="address_city" class="java.lang.String"/>
+	<field name="address_zip" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="90" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="29" width="572" height="30" uuid="349224b5-c955-4c61-af16-3279f081f02f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte Envio]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement stretchType="RelativeToTallestObject" x="20" y="5" width="100" height="30" uuid="e338f3f2-389b-4071-989e-f96b066e2add"/>
+				<text><![CDATA[Datos del pago]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<textField>
+				<reportElement x="-1" y="0" width="80" height="30" uuid="bf929740-fb20-4b6e-955e-781cb9c01749"/>
+				<textFieldExpression><![CDATA[$F{factura}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="86" y="0" width="100" height="30" uuid="99e9f9d2-61f0-4502-bc57-331496dee5dc"/>
+				<textFieldExpression><![CDATA[$F{estatusPago}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="81" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="100" height="30" uuid="c496997a-67dc-4029-a8cb-7f6c953657dc"/>
+				<text><![CDATA[Address]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="340" y="31" width="100" height="30" uuid="6ed57a7e-c2e0-4079-8549-ae20654947de"/>
+				<textFieldExpression><![CDATA[$F{address_name}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="440" y="31" width="110" height="30" uuid="200211ee-231c-47e7-900e-f55bb139be6c"/>
+				<textFieldExpression><![CDATA[$F{address_city}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="196" y="31" width="134" height="30" uuid="608c7676-91a5-4eeb-a0ac-cb84293058a3"/>
+				<textFieldExpression><![CDATA[$F{address_state}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-10" y="31" width="206" height="30" uuid="d703059a-410d-47f8-88ad-ce42d60d0f30"/>
+				<textFieldExpression><![CDATA[$F{address_zip}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="55" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
