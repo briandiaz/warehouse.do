@@ -63,14 +63,16 @@ class PaymentController {
         payment.purchase = compra;
 
         payment.save(failOnError: true);
+
         mailService.sendMail {
+            from "giareloaded07@gmail.com"
             to BusinessLogicService.getEmailUsersOfArea("Warehouse")
             subject "Item to be shipped from WareHouse.Do"
             html "<i>Some items have been requested from the warehouse area.</i>\n" +
                     "<br/>\n" +
                     "<a href=\"http://localhost:8080/warehouse/\">WareHouse.DO</a>\n" +
                     "<br/>\n"
-                    "These are the items:<br/>"+ items_email +
+            "These are the items:<br/>"+ items_email +
                     "<br/>\n" +
                     "Thanks."
         }

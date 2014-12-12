@@ -6,7 +6,6 @@ import grails.transaction.Transactional
 
 @Transactional(readOnly = true)
 class PersonController {
-
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
     def mailService
 
@@ -39,18 +38,21 @@ class PersonController {
         personInstance.save flush: true
         def roleClient = Role.findByName("Cliente");
         UserRole.create(user, roleClient, true);
+        Cart cart = new Cart(owner: personInstance.user).save(failOnError: true);
+        println(personInstance.user.email)
         mailService.sendMail {
-            to user.email
+            from "giareloaded07@gmail.com"
+            to personInstance.user.email
             subject "Welcome to WareHouse.Do"
             html "<i>Dear "+personInstance+"</i>\n" +
                     "<br/>\n" +
                     "Welcome to <a href=\"http://localhost:8080/warehouse/\">WareHouse.DO</a>\n" +
                     "<br/>\n" +
-                    "To sign in at the <a href=\"http://localhost:8080/warehouse/person/create\">site</a> this are your credentials:\n" +
+                    "To sign in at the <a href=\"http://localhost:8080/warehouse/login/auth\">site</a> this are your credentials:\n" +
                     "<br/>\n" +
                     "<br/>\n" +
                     "<b>username:</b> " + user.username +
-                    "<b>password:</b> " + user.password +
+                    "<br/><b>password:</b> " + params.password +
                     "<br/><br/><br/>\n" +
                     "Thanks."
         }

@@ -70,8 +70,14 @@
 						<% if(BusinessLogicService.is_authenticated()) {%>
 						<li><a href="#"><i class="icon fa fa-user"></i>My Account</a></li>
 						<li><a href="${createLink(uri: '/')}cart"><i class="icon fa fa-shopping-cart"></i>My Cart</a></li>
-						<li><a href="#"><i class="icon fa fa-key"></i>Checkout</a></li>
 						<li><g:link controller="user" action="logout" ><i class="icon fa fa-key"></i>LogOut</g:link></li>
+						<% } %>
+						<% if(BusinessLogicService.session().username == "admin") {%>
+						<li><a href="${createLink(uri: '/')}item/create"><i class="icon fa fa-user"></i>Create Item</a></li>
+						<li><a href="${createLink(uri: '/')}department/create"><i class="icon fa fa-shopping-cart"></i>Create Departament</a></li>
+						<li><a href="${createLink(uri: '/')}area/create"><i class="icon fa fa-key"></i>Create Area</a></li>
+						<li><a href="${createLink(uri: '/')}area/show/1"><i class="icon fa fa-key"></i>Item to be Delivered</a></li>
+						<li><a href="${createLink(uri: '/')}payment/"><i class="icon fa fa-key"></i>Payments</a></li>
 						<% } %>
 						<% if(!BusinessLogicService.is_authenticated()) {%>
 							<li><a href="${createLink(uri: '/')}login/auth"><i class="icon fa fa-sign-in"></i>Login</a></li>
@@ -113,7 +119,7 @@
 				<div class="col-xs-12 col-sm-12 col-md-6 top-search-holder">
 					<div class="contact-row">
 						<div class="phone inline">
-							<i class="icon fa fa-phone"></i> (400) 888 888 868
+							<i class="icon fa fa-phone"></i> (826) 616 2714
 						</div>
 						<div class="contact inline">
 							<i class="icon fa fa-envelope"></i> saler@warehouse.do

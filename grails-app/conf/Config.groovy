@@ -1,3 +1,13 @@
+grails {
+    mail {
+        host = "smtp.host809.com"
+        port = 587
+        username = "camacho@host809.com"
+        password = "camacho123"
+        props = ["mail.smtp.host":"mail.host809.com",
+                 "mail.smtp.port":"587"]
+    }
+}
 // locations to search for config files that get merged into the main config;
 // config files can be ConfigSlurper scripts, Java properties files, or classes
 // in the classpath in ConfigSlurper format
@@ -89,16 +99,17 @@ environments {
     development {
         grails.logging.jul.usebridge = true
     }
-    grails {
-        mail {
-            host = "smtp.host809.com"
-            port = 587
-            username = "camacho@host809.com"
-            password = "camacho123"
-            props = ["mail.smtp.host":"mail.host809.com",
-                     "mail.smtp.port":"587"]
-        }
-    }
+   /*
+    mandrill {
+        apiKey = "-GsbYcsEFCvJOUBgQwXCfg"
+        // insert proxy values if needed
+        //proxy {
+           //   host = "smtp.mandrillapp.com"
+        // The port Value has to be an integer ;)
+         //     port = 587
+        //}
+    }*/
+
     production {
         grails.logging.jul.usebridge = false
         // TODO: grails.serverURL = "http://www.changeme.com"

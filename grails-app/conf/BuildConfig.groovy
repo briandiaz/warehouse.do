@@ -45,7 +45,7 @@ grails.project.dependency.resolution = {
         //mavenRepo "http://download.java.net/maven/2/"
         //mavenRepo "http://repository.jboss.com/maven2/"
         //mavenRepo 'http://dl.bintray.com/karman/karman'
-        //mavenRepo "http://repo.grails.org/grails/core"
+        //mavenRepo "https://sendgrid-open-source.s3.amazonaws.com/sendgrid-java/sendgrid-java.jar"
 
     }
 
@@ -60,6 +60,8 @@ grails.project.dependency.resolution = {
         // plugins for the build system only
         build ":tomcat:7.0.55"
 
+
+
         // plugins for the compile step
         compile ":scaffolding:2.1.2"
         compile ':cache:1.1.8'
@@ -68,6 +70,7 @@ grails.project.dependency.resolution = {
         //compile ":karman:0.6.1"
         //compile ":selfie:0.5.0"
         compile ":mail:1.0.7"
+        compile ":mandrill:0.5"
 
         // plugins needed at runtime but not for compilation
         runtime ":hibernate4:4.3.6.1" // or ":hibernate:3.6.10.18"
@@ -75,6 +78,7 @@ grails.project.dependency.resolution = {
         runtime ":jquery:1.11.1"
         runtime ':twitter-bootstrap:3.3.1'
 
+        //compile 'com.sendgrid:sendgrid-java:2.0.0'
 
         // Uncomment these to enable additional asset-pipeline capabilities
         //compile ":sass-asset-pipeline:1.9.0"

@@ -1,13 +1,14 @@
 package warehouse
 
 import grails.transaction.Transactional
+import org.grails.mandrill.MandrillMessage
+import org.grails.mandrill.MandrillRecipient
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.context.SecurityContextHolder
 
-
 @Transactional
 class BusinessLogicService {
-
+    def mandrillService
     def serviceMethod() {
 
 
@@ -44,6 +45,32 @@ class BusinessLogicService {
 
     def static getProductsToBeShipped(){
         return Purchase.findAllByStatus(Status.findByValue(1));
+    }
+
+    def sendMailToSingleMailMandrill(name, email, subject, msg){
+        def recpts = []
+        recpts.add(new MandrillRecipient(name:name, email:email))
+        def message = new MandrillMessage(
+                text:msg,
+                subject:subject,
+                from_email:"brian@briandiaz.me",
+                to:recpts)
+        message.tags.add("test")
+        def ret = mandrillService.send(message)
+    }
+
+    def sendMailToMultipleMailMandrill(emails, subject, msg){
+        def recpts = []
+        for(email in emails){
+            recpts.add(new MandrillRecipient(name:"Usuario", email:email))
+        }
+        def message = new MandrillMessage(
+                text:msg,
+                subject:subject,
+                from_email:"brian@briandiaz.me",
+                to:recpts)
+        message.tags.add("test")
+        def ret = mandrillService.send(message)
     }
 
 
